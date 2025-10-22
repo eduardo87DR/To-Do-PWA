@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Trash2, PlusCircle } from "lucide-react";
 import Modal from "./Modal";
 import "./App.css";
+import { showNotification, requestNotificationPermission } from "./utils/notifications";
 
 function App() {
   const [todos, setTodos] = useState(() => {
@@ -18,6 +19,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
 
   const openModal = (title, message, icon) => {
     setModal({ isOpen: true, title, message, icon });
@@ -38,6 +43,9 @@ function App() {
     ]);
     setText("");
     openModal("Tarea agregada", "Se ha agregado la tarea correctamente!", "plus");
+
+    showNotification(`Nueva tarea agregada: "${text}"`);
+
   };
 
   const toggleTodo = (id) => {
