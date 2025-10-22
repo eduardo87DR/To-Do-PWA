@@ -61,7 +61,7 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
     openModal("Tarea eliminada", "La tarea se ha eliminado con éxito.", "trash");
 
-    showNotification(`Tarea eliminada correctamente: "${text}"`);
+    showNotification(`Tarea eliminada: "${text}"`);
 
   };
 
